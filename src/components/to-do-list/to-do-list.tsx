@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { ToDoItem, ToDoUList, ToDoCompleted, EditButton, AddButton, ListContainer, CompleteDiv, ToDoDesc, CheckMark } from '../../styles/styles'
 import { useNavigate } from "react-router-dom"
+import { AddButton, CheckMark, CompleteDiv, EditButton, ListContainer, ToDoDesc, ToDoItem, ToDoUList } from '../../styles/styles'
 
 type ToDo = {
     Description: string
