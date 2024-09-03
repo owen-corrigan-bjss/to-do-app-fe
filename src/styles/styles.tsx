@@ -79,4 +79,12 @@ width: 40%;
 
 export const CompleteDiv= styled.div<{}>`
 width: 40%;
+display: flex; 
+flex-direction: row; 
+`
+export const CompleteLabel = styled.label<{}>`
+margin-right: 20px;
+`
+export const CheckMark = styled.img<{}>`
+margin-left: 20px
 `

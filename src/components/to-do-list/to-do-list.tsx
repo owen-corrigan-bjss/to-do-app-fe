@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { ToDoItem, ToDoUList, ToDoCompleted, EditButton, AddButton, ListContainer, CompleteDiv, ToDoDesc } from '../../styles/styles'
+import { ToDoItem, ToDoUList, ToDoCompleted, EditButton, AddButton, ListContainer, CompleteDiv, ToDoDesc, CheckMark } from '../../styles/styles'
 import { useNavigate } from "react-router-dom"
 
 type ToDo = {
@@ -30,6 +30,18 @@ export const ToDoList = () => {
         navigate(url)
     }
 
+    const completeStatus = (id: string) => {
+        if (toDoList[id].Completed) {
+            return (
+                <a title="Emoji One, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Eo_circle_green_checkmark.svg"><CheckMark width="25px" alt="Eo circle green checkmark" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/512px-Eo_circle_green_checkmark.svg.png?20200417132424" /></a>  
+            )
+        } else {
+            return (
+               "To Do"
+            )
+        }
+    }
+
     const renderList = () => {
         const ids = Object.keys(toDoList)
         if (ids.length > 0) {
@@ -37,11 +49,7 @@ export const ToDoList = () => {
                 return (
                     <ToDoItem key={id}>
                         <ToDoDesc>{toDoList[id].Description}</ToDoDesc>
-                        <CompleteDiv>
-                            <label>Complete:
-                                <ToDoCompleted type="checkbox" disabled checked={toDoList[id].Completed} />
-                            </label>
-                        </CompleteDiv>
+                        <CompleteDiv> Complete: {completeStatus(id)}</CompleteDiv>
                         <EditButton onClick={() => navigateTo(`/todo/${id}`)}>Edit</EditButton></ToDoItem>
                 )
             })

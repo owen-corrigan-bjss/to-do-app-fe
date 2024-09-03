@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { ToDoItem, ToDoCompleted, EditButton, ToDoUList, DeleteButton } from "../../styles/styles"
+import { ToDoItem, ToDoCompleted, EditButton, ToDoUList, DeleteButton, ConfirmButton, ListContainer, CompleteLabel } from "../../styles/styles"
 
 type ToDo = {
     Description: string
@@ -59,42 +59,22 @@ export const EditToDo = () => {
         }
     }
 
-    const renderList = () => {
-        const ids = Object.keys(toDo ?? "0")
-        if (ids.length > 0 && toDo) {
-            const items = ids.map((id: string) => {
-                return (
-                    <ToDoItem key={id}>
-                        <div>{toDo[id].Description}</div>
-                        <div>
-                            <label>Complete:
-                                <ToDoCompleted type="checkbox" checked={complete} onClick={() => handleClick()} />
-                            </label>
-                        </div>
-                        <DeleteButton onClick={() => deleteToDo()}>Delete</DeleteButton>
-                    </ToDoItem>
-                )
-            })
-            return items
-
-        }
-    }
     if (id && toDo) {
         return (
-            <div>
+            <ListContainer>
                 <h2>Edit To Do</h2>
                 <ToDoUList>
                     <ToDoItem key={id}>
                         <div>{toDo[id].Description}</div>
                         <div>
-                            <label>Complete:
-                                <ToDoCompleted type="checkbox" checked={complete} onClick={() => handleClick()} />
-                            </label>
+                            <CompleteLabel>Complete:
+                                <ToDoCompleted type="checkbox" checked={complete} onChange={() => handleClick()} />
+                            </CompleteLabel>
                         </div>
                         <DeleteButton onClick={() => deleteToDo()}>Delete</DeleteButton>
                     </ToDoItem></ToDoUList>
-                <button onClick={handleSave}>save</button>
-            </div>
+                <ConfirmButton onClick={handleSave}>save</ConfirmButton>
+            </ListContainer>
         )
     } else {
         return <h2>Item doesn't exist</h2>
